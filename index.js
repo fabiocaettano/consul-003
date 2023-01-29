@@ -6,7 +6,7 @@ var consul = new Consul();
 
 console.log(process.argv[2]);
 
-const SERVICE_NAME = 'microServicoYoutube';
+const SERVICE_NAME = 'microservice';
 const SERVICE_ID = 'm_'+process.argv[2];
 const SCHEME = 'http';
 const HOST = '167.172.141.252';
