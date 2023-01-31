@@ -1,0 +1,71 @@
+version: '3.7'
+
+services:
+    consul-server-01:
+        image: consul:1.11.2
+        container_name: consul-server-01        
+        restart: always
+        command: "agent -bootstrap-expect=3"
+        volumes :
+           - ./servers/server01.json:/consul/config/server01.json           
+           - ./certs/:/consul/config/certs/
+        ports:
+           - "8500:8500"
+           - "8600:8600/tcp"
+           - "8600:8600/udp"
+        networks:
+            - consul
+
+    consul-server-02:
+        image: consul:1.11.2
+        container_name: consul-server-02                
+        restart: always
+        command: "agent -bootstrap-expect=3"
+        volumes :
+           - ./servers/server02.json:/consul/config/server02.json
+           - ./certs/:/consul/config/certs/
+        networks:
+            - consul
+
+    consul-server-03:
+        image: consul:1.11.2
+        container_name: consul-server-03                
+        command: "agent -bootstrap-expect=3"
+        restart: always 
+        volumes :
+           - ./servers/server03.json:/consul/config/server03.json
+           - ./certs/:/consul/config/certs/
+        networks:
+            - consul
+
+    consul-client-01:
+        image: consul:1.11.2
+        container_name: consul-client-01        
+        command: "agent" 
+        volumes:
+            - ./servers/client01.json:/consul/config/client01.json            
+            - ./certs/:/consul/config/certs/
+        networks:
+            - consul
+    consul-client-02:
+        image: consul:1.11.2
+        container_name: consul-client-02        
+        command: "agent" 
+        volumes:
+            - ./servers/client02.json:/consul/config/client02.json
+            - ./certs/:/consul/config/certs/
+        networks:
+            - consul
+    consul-client-03:
+        image: consul:1.11.2
+        container_name: consul-client-03
+        command: "agent" 
+        volumes:
+            - ./servers/client03.json:/consul/config/client03.json            
+            - ./certs/:/consul/config/certs/
+        networks:
+            - consul
+                
+networks:
+  consul:
+    driver: bridge

@@ -24,7 +24,7 @@ ifconfig
 Executar consul:
 
 ```
-./consul agent -dev -bind=167.172.141.252 -data-dir=/consul/data -ui -client=0.0.0.0
+./consul agent -dev -bind=142.93.201.132 -data-dir=/consul/data -ui -client=0.0.0.0
 ```
 
 

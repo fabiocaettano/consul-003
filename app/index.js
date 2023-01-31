@@ -14,10 +14,12 @@ const PORT = process.argv[2] * 1;
 
 const app = express();
 
+/** Checar a saúde*/
 app.get('/health', function (req,res){
     res.end("Ok.");
 });
 
+/** Listar serviços*/
 app.get('/', async(req,res) => {
 
     var s="<h1>Instância '"+ SERVICE_ID +"' </h1>";
@@ -51,9 +53,4 @@ var check = {
 
 consul.agent.service.register(check, function(err){
     if(err) throw err;
-});
-
-consul.agent.service.list(function(err,result){
-    console.log('result:');
-    
 });
